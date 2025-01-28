@@ -32,6 +32,14 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     return document;
   }
 
+  async findAll(filterQuery: FilterQuery<TDocument>): Promise<TDocument[]> {
+    const documents = await this.model
+      .find(filterQuery)
+      .lean<TDocument[]>(true);
+
+    return documents;
+  }
+
   async findOneAndUpdate(
     filterQury: FilterQuery<TDocument>,
     update: UpdateQuery<TDocument>,
