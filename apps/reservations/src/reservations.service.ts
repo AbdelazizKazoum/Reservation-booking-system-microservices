@@ -26,11 +26,14 @@ export class ReservationsService {
     return this.reservationsRepository.finOne({ _id: id });
   }
 
-  update(id: number, updateReservationDto: UpdateReservationDto) {
-    return `This action updates a #${id} reservation`;
+  update(_id: string, updateReservationDto: UpdateReservationDto) {
+    return this.reservationsRepository.findOneAndUpdate(
+      { _id },
+      updateReservationDto,
+    );
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} reservation`;
+  remove(_id: string) {
+    return this.reservationsRepository.findOneAndDelete({ _id });
   }
 }
